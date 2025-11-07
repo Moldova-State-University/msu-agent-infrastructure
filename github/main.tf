@@ -1,3 +1,49 @@
+#################
+# Local Values #
+################
+
+locals {
+  # Transform nested team membership structure into flat map for Terraform iteration
+  # This converts team -> [members] into individual team-member pairs
+  # Example: {"ai-team": ["alice", "bob"]} becomes {"ai-team-alice": {...}, "ai-team-bob": {...}}
+  sub_team_memberships = merge([
+    for team_name, team_config in var.sub_team_slugs : {
+      for member in team_config.members :
+      "${team_name}-${member}" => {
+        team_id  = github_team.sub_teams[team_name].id
+        username = member
+      }
+    }
+  ]...)
+
+  # Transform repository team access structure into flat map for Terraform iteration
+  # This converts repo -> {team: permission} into individual repo-team-permission triplets
+  # Example: {"repo1": {"ai-team": "maintain"}} becomes {"repo1-ai-team": {...}}
+  team_repository_access = merge([
+    for repo_key, repo_config in var.repositories : {
+      for team_slug, permission in repo_config.team_access :
+      "${repo_key}-${team_slug}" => {
+        repository_name = github_repository.repos[repo_key].name
+        team_id         = github_team.sub_teams[team_slug].id
+        permission      = permission
+      }
+    }
+  ]...)
+}
+
+################
+# Data Sources #
+################
+
+# Parent Team Data
+data "github_team" "parent_team" {
+  slug = var.parent_team_slug
+}
+
+###########################
+# Organization Management #
+###########################
+
 # Add Users to Organization
 resource "github_membership" "org_members" {
   for_each = var.users
@@ -6,10 +52,9 @@ resource "github_membership" "org_members" {
   role     = each.value.org_role
 }
 
-# Parent Team Data
-data "github_team" "parent_team" {
-  slug = var.parent_team_slug
-}
+###################
+# Team Management #
+###################
 
 # Add Users to Parent Team
 resource "github_team_membership" "parent_team_members" {
@@ -23,7 +68,7 @@ resource "github_team_membership" "parent_team_members" {
   depends_on = [github_membership.org_members]
 }
 
-# Add Sub-Teams Data
+# Create Sub-Teams
 resource "github_team" "sub_teams" {
   for_each = var.sub_team_slugs
 
@@ -34,24 +79,6 @@ resource "github_team" "sub_teams" {
 }
 
 # Add Members to Sub-Teams
-
-# Logic: Create a local map that combines team names with their members
-# e.g. for team "devs" with members ["alice", "bob"], create keys "devs-alice", "devs-bob"
-# this allows us to use for_each to create memberships
-# without this we cannot directly iterate over nested lists in Terraform
-
-locals {
-  sub_team_memberships = merge([
-    for team_name, team_config in var.sub_team_slugs : {
-      for member in team_config.members :
-      "${team_name}-${member}" => {
-        team_id  = github_team.sub_teams[team_name].id
-        username = member
-      }
-    }
-  ]...)
-}
-
 resource "github_team_membership" "sub_team_members" {
   for_each = local.sub_team_memberships
 
@@ -67,7 +94,11 @@ resource "github_team_membership" "sub_team_members" {
 }
 
 
-# Create Repository
+#########################
+# Repository Management #
+#########################
+
+# Create Repositories
 resource "github_repository" "repos" {
   for_each = var.repositories
 
@@ -94,24 +125,7 @@ resource "github_repository" "repos" {
   }
 }
 
-# Grant Team Access to Repository
-# Logic: Create a local map that combines repository names with team access
-# e.g. for repo "msu-agent" with team access {"ai-team": "maintain", "web-team": "push"}
-# create keys "msu-agent-ai-team", "msu-agent-web-team"
-
-locals {
-  team_repository_access = merge([
-    for repo_key, repo_config in var.repositories : {
-      for team_slug, permission in repo_config.team_access :
-      "${repo_key}-${team_slug}" => {
-        repository_name = github_repository.repos[repo_key].name
-        team_id         = github_team.sub_teams[team_slug].id
-        permission      = permission
-      }
-    }
-  ]...)
-}
-
+# Grant Team Access to Repositories
 resource "github_team_repository" "team_access" {
   for_each = local.team_repository_access
 
@@ -123,6 +137,10 @@ resource "github_team_repository" "team_access" {
   depends_on = [github_team_membership.sub_team_members]
 }
 
+################################################################################
+# Branch Protection
+################################################################################
+
 # Branch Protection for main branch
 resource "github_branch_protection" "main" {
   for_each = var.repositories
@@ -133,13 +151,13 @@ resource "github_branch_protection" "main" {
   enforce_admins = true
 
   required_pull_request_reviews {
-    # dismiss stale reviews - true/false is to dismiss previous approvals when new commits are pushed
+    # Dismiss stale reviews when new commits are pushed
     dismiss_stale_reviews = true
-    # Require code owner reviews - true/false to enforce reviews from code owners
+    # Require code owner reviews when CODEOWNERS file exists
     require_code_owner_reviews = true
-    # required_approving_review_count - set from variable is the number of required approvals
+    # Number of required approvals before merge
     required_approving_review_count = each.value.required_approving_review_count
-    # require_last_push_approval - true/false to require approval for the last push
+    # Require approval for the last push
     require_last_push_approval = false
   }
 
@@ -148,7 +166,8 @@ resource "github_branch_protection" "main" {
     contexts = []
   }
 
-  # Restrict Direct Pushes to main branch
+  # Completely restrict direct pushes to main branch
+  # All changes must go through pull requests
   restrict_pushes {
     blocks_creations = true
     push_allowances  = []
