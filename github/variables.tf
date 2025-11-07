@@ -1,6 +1,6 @@
-#####################################
-# GitHub Organization Configuration #
-#####################################
+################################################################################
+# GitHub Organization Configuration
+################################################################################
 
 variable "org_name" {
   description = "Github organization name"
@@ -13,9 +13,9 @@ variable "github_token" {
   sensitive   = true
 }
 
-#######################
-# Users Configuration #
-#######################
+################################################################################
+# Users Configuration
+################################################################################
 
 variable "users" {
   description = "Users to add to organization and parent team"
@@ -30,9 +30,9 @@ variable "users" {
   }
 }
 
-############################
-# Repository Configuration #
-############################
+################################################################################
+# Repository Configuration
+################################################################################
 
 variable "repositories" {
   description = <<-EOT
@@ -57,7 +57,7 @@ variable "repositories" {
     description                     = string
     visibility                      = string
     topics                          = optional(list(string), []) # repository topics
-    team_access                     = map(string) # team_slug -> permission mapping
+    team_access                     = map(string)                # team_slug -> permission mapping
     required_approving_review_count = number
     auto_init                       = optional(bool, false) # initialize with commit and README
   }))
@@ -72,7 +72,7 @@ variable "repositories" {
   validation {
     condition = alltrue([
       for repo in values(var.repositories) : alltrue([
-        for permission in values(repo.team_access) : 
+        for permission in values(repo.team_access) :
         contains(["pull", "triage", "push", "maintain", "admin"], permission)
       ])
     ])
@@ -86,9 +86,9 @@ variable "repositories" {
   }
 }
 
-######################
-# Team Configuration #
-######################
+################################################################################
+# Team Configuration
+################################################################################
 
 variable "parent_team_slug" {
   description = "Parent team slug"
