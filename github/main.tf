@@ -1,6 +1,6 @@
-################
-# Local Values #
-################
+################################################################################
+# Local Values 
+################################################################################
 
 locals {
   # Transform nested team membership structure into flat map for Terraform iteration
@@ -31,18 +31,18 @@ locals {
   ]...)
 }
 
-################
-# Data Sources #
-################
+################################################################################
+# Data Sources 
+################################################################################
 
 # Parent Team Data
 data "github_team" "parent_team" {
   slug = var.parent_team_slug
 }
 
-###########################
-# Organization Management #
-###########################
+################################################################################
+# Organization Management
+################################################################################
 
 # Add Users to Organization
 resource "github_membership" "org_members" {
@@ -52,9 +52,9 @@ resource "github_membership" "org_members" {
   role     = each.value.org_role
 }
 
-###################
-# Team Management #
-###################
+################################################################################
+# Team Management
+################################################################################
 
 # Add Users to Parent Team
 resource "github_team_membership" "parent_team_members" {
@@ -94,9 +94,9 @@ resource "github_team_membership" "sub_team_members" {
 }
 
 
-#########################
-# Repository Management #
-#########################
+################################################################################
+# Repository Management
+################################################################################
 
 # Create Repositories
 resource "github_repository" "repos" {

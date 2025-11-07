@@ -1,14 +1,16 @@
-########################
-# Organization Outputs #
-########################
+################################################################################
+# Organization Outputs
+################################################################################
+
 output "organization_members" {
   description = "List of users added to organization"
   value       = keys(var.users)
 }
 
-#######################
-# Parent Team Outputs #
-#######################
+################################################################################
+# Parent Team Outputs
+################################################################################
+
 output "parent_team" {
   description = "Parent team information"
   value = {
@@ -18,9 +20,10 @@ output "parent_team" {
   }
 }
 
-#####################
-# Sub-Teams Outputs #
-#####################
+################################################################################
+# Sub-Teams Outputs
+################################################################################
+
 output "sub_teams" {
   description = "Created sub-teams with their members"
   value = {
@@ -33,9 +36,10 @@ output "sub_teams" {
   }
 }
 
-######################
-# Repository Outputs #
-######################
+################################################################################
+# Repository Outputs 
+################################################################################
+
 output "repositories" {
   description = "Created repositories with details"
   value = {
@@ -49,9 +53,10 @@ output "repositories" {
   }
 }
 
-##############################
-# Repository Access Summary  #
-##############################
+################################################################################
+# Repository Access Summary 
+################################################################################
+
 output "repository_access_summary" {
   description = "Summary of repository access by teams"
   value = {
@@ -67,9 +72,10 @@ output "repository_access_summary" {
   }
 }
 
-#################################
-# Team Repository Access Matrix #
-#################################
+################################################################################
+# Team Repository Access Matrix 
+################################################################################
+
 output "team_repository_access_matrix" {
   description = "Detailed matrix of team access to repositories"
   value = {
@@ -82,9 +88,10 @@ output "team_repository_access_matrix" {
 }
 
 
-###########################
-# Complete Summary Output #
-###########################
+################################################################################
+# Complete Summary Output 
+################################################################################
+
 output "summary" {
   description = "Complete summary of organization, teams, members, and repositories"
   value = {
