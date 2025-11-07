@@ -1,6 +1,7 @@
 #####################################
 # GitHub Organization Configuration #
 #####################################
+
 variable "org_name" {
   description = "Github organization name"
   type        = string
@@ -88,6 +89,7 @@ variable "repositories" {
 ######################
 # Team Configuration #
 ######################
+
 variable "parent_team_slug" {
   description = "Parent team slug"
   type        = string
