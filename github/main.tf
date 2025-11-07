@@ -7,7 +7,7 @@ locals {
   # This converts team -> [members] into individual team-member pairs
   # Example: {"ai-team": ["alice", "bob"]} becomes {"ai-team-alice": {...}, "ai-team-bob": {...}}
   sub_team_memberships = merge([
-    for team_name, team_config in var.sub_team_slugs : {
+    for team_name, team_config in var.sub_team : {
       for member in team_config.members :
       "${team_name}-${member}" => {
         team_id  = github_team.sub_teams[team_name].id
@@ -70,7 +70,7 @@ resource "github_team_membership" "parent_team_members" {
 
 # Create Sub-Teams
 resource "github_team" "sub_teams" {
-  for_each = var.sub_team_slugs
+  for_each = var.sub_team
 
   name           = each.key
   description    = each.value.description
