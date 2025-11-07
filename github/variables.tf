@@ -96,8 +96,8 @@ variable "parent_team_slug" {
   default     = "msu-agent-team"
 }
 
-variable "sub_team_slugs" {
-  description = "List of subteam slugs to create under the parent team"
+variable "sub_team" {
+  description = "List of subteams to create under the parent team"
 
   type = map(object({
     description = string

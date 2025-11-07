@@ -31,7 +31,7 @@ output "sub_teams" {
       id          = team.id
       slug        = team.slug
       description = team.description
-      members     = var.sub_team_slugs[name].members
+      members     = var.sub_team[name].members
     }
   }
 }
@@ -106,7 +106,7 @@ output "summary" {
         id          = team.id
         slug        = team.slug
         description = team.description
-        members     = var.sub_team_slugs[name].members
+        members     = var.sub_team[name].members
       }
     }
     repositories = {
