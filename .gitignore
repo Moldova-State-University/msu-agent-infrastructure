@@ -25,3 +25,6 @@ terraform.rc
 
 # Lock file for Terraform modules
 .terraform.lock.hcl
+
+# Exclude specific .tfvars file that is needed for ci/cd pipeline
+!github/terraform.tfvars
