@@ -65,7 +65,7 @@ sub_team = {
   },
   "pm-team" = {
     description = "Project Management Team overseeing project progress"
-    members     = ["devrdn", "sharishi", "mcroitor"]
+    members     = ["devrdn", "sharishi", "mcroitor", "TrEtLiz"]
   }
 }
 
