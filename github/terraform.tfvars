@@ -61,7 +61,7 @@ sub_team = {
   },
   "qa-team" = {
     description = "Quality Assurance Team for testing and validation"
-    members     = ["devrdn", "mcroitor", "TrEtLiz", "danutasemeniuc"]
+    members     = ["devrdn", "mcroitor", "TrEtLiz"]
   },
   "pm-team" = {
     description = "Project Management Team overseeing project progress"
