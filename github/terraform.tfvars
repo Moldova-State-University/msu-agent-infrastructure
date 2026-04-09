@@ -87,6 +87,38 @@ repositories = {
     required_approving_review_count = 2
   },
 
+  "msu-agent-knowledge-data-parser" = {
+    name        = "msu-agent-knowledge-data-parser"
+    visibility  = "public"
+    description = "Knowledge data parser repository for MSU Agent project. Managed by Terraform."
+    topics      = ["msu", "artificial-intelligence", "knowledge-base", "chatbot"]
+    auto_init   = true
+
+    team_access = {
+      "ai-team"     = "maintain"
+      "devops-team" = "admin"
+    }
+
+    # For this repo, require 2 approving reviews before merging
+    required_approving_review_count = 2
+  },
+
+  "msu-agent-ai-service" = {
+    name        = "msu-agent-ai-service"
+    visibility  = "public"
+    description = "AI service repository for MSU Agent project. Managed by Terraform."
+    topics      = ["msu", "artificial-intelligence", "ai-service", "chatbot"]
+    auto_init   = true
+
+    team_access = {
+      "ai-team"     = "maintain"
+      "devops-team" = "admin"
+    }
+
+    # For this repo, require 2 approving reviews before merging
+    required_approving_review_count = 2
+  },
+
   "msu-agent-krystallic-version" = {
     name        = "msu-agent-krystallic-version"
     description = "Special version of Krystallic Engine, developed by BytesForge, for MSU Agent program on Android and IOS. Managed by Terraform."
