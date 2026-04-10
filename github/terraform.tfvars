@@ -38,6 +38,9 @@ users = {
   },
   "danutasemeniuc" = {
     org_role = "member"
+  },
+  "FaStiCkeR" = {
+    org_role = "member"
   }
 }
 
@@ -53,7 +56,7 @@ sub_team = {
   },
   "web-team" = {
     description = "Web Development Team"
-    members     = ["mcroitor", "devrdn", "JUnknowL"]
+    members     = ["mcroitor", "devrdn", "JUnknowL", "FaStiCkeR"]
   },
   "devops-team" = {
     description = "DevOps Team managing infrastructure repositories"
