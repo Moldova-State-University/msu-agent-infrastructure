@@ -48,7 +48,7 @@ users = {
 sub_team = {
   "ai-team" = {
     description = "AI Team with access to AI-related repositories"
-    members     = ["mcroitor", "devrdn", "TrEtLiz", "AndreiKlinchev", "statova-nadejda", "danutasemeniuc"]
+    members     = ["mcroitor", "devrdn", "AndreiKlinchev", "statova-nadejda", "sharishi", "danutasemeniuc"]
   },
   "ar-team" = {
     description = "AR Team with access to AR-related repositories"
@@ -68,7 +68,7 @@ sub_team = {
   },
   "pm-team" = {
     description = "Project Management Team overseeing project progress"
-    members     = ["devrdn", "sharishi", "mcroitor", "TrEtLiz"]
+    members     = ["devrdn", "mcroitor", "sharishi", "TrEtLiz"]
   }
 }
 
