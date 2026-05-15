@@ -41,6 +41,9 @@ users = {
   },
   "FaStiCkeR" = {
     org_role = "member"
+  },
+  "yorunikakeru4" = {
+    org_role = "member"
   }
 }
 
@@ -52,7 +55,7 @@ sub_team = {
   },
   "ar-team" = {
     description = "AR Team with access to AR-related repositories"
-    members     = ["mcroitor", "devrdn", "leopard-bf187", "A1EXSO"]
+    members     = ["mcroitor", "devrdn", "leopard-bf187", "A1EXSO", "yorunikakeru4"]
   },
   "web-team" = {
     description = "Web Development Team"
@@ -60,7 +63,7 @@ sub_team = {
   },
   "devops-team" = {
     description = "DevOps Team managing infrastructure repositories"
-    members     = ["devrdn", "mcroitor", "Rengeka"]
+    members     = ["devrdn", "mcroitor", "Rengeka", "yorunikakeru4"]
   },
   "qa-team" = {
     description = "Quality Assurance Team for testing and validation"
