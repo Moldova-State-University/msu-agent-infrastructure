@@ -128,8 +128,8 @@ repositories = {
     required_approving_review_count = 2
   },
 
-  "msu-agent-krystallic-version" = {
-    name        = "msu-agent-krystallic-version"
+  "msu-agent-krystallic" = {
+    name        = "msu-agent-krystallic"
     description = "Special version of Krystallic Engine, developed by BytesForge, for MSU Agent program on Android and IOS. Managed by Terraform."
     visibility  = "public"
     topics      = ["augmented-reality", "mobile", "android", "ios", "3d-engine", "krystallic"]
@@ -141,6 +141,68 @@ repositories = {
     }
 
     required_approving_review_count = 0
+  },
+
+  "msu-agent-krystallic-runtime" = {
+    name        = "msu-agent-krystallic-runtime"
+    description = "Krystallic Runtime repository for MSU Agent project. Managed by Terraform."
+    visibility  = "public"
+    topics      = ["augmented-reality", "mobile", "3d-engine", "krystallic", "runtime"]
+    auto_init   = true
+
+    team_access = {
+      "ar-team"     = "admin"
+      "devops-team" = "admin"
+    }
+
+    required_approving_review_count = 1
+  },
+
+  "msu-agent-krystallic-editor" = {
+    name        = "msu-agent-krystallic-editor"
+    description = "Krystallic Editor repository for MSU Agent project. Managed by Terraform."
+    visibility  = "public"
+    topics      = ["augmented-reality", "3d-engine", "krystallic", "editor"]
+    auto_init   = true
+
+    team_access = {
+      "ar-team"     = "admin"
+      "devops-team" = "admin"
+    }
+
+    required_approving_review_count = 1
+  },
+
+  "msu-agent-mobile-client" = {
+    name        = "msu-agent-mobile-client"
+    description = "Mobile client repository for MSU Agent project. Managed by Terraform."
+    visibility  = "public"
+    topics      = ["augmented-reality", "mobile", "android", "ios", "3d-engine", "krystallic"]
+    auto_init   = true
+
+    team_access = {
+      "ar-team"     = "admin"
+      "web-team"    = "maintain"
+      "devops-team" = "admin"
+    }
+
+    required_approving_review_count = 1
+  },
+
+  "msu-agent-mobile-resources" = {
+    name        = "msu-agent-mobile-resources"
+    description = "Mobile resources repository for MSU Agent project. Managed by Terraform."
+    visibility  = "public"
+    topics      = ["augmented-reality", "mobile", "android", "ios", "3d-engine", "krystallic"]
+    auto_init   = true
+
+    team_access = {
+      "ar-team"     = "admin"
+      "web-team"    = "maintain"
+      "devops-team" = "admin"
+    }
+
+    required_approving_review_count = 1
   },
 
   "msu-agent-documentation" = {
@@ -172,5 +234,20 @@ repositories = {
     }
 
     required_approving_review_count = 0
+  },
+
+  "msu-agent-backend" = {
+    name        = "msu-agent-backend"
+    description = "MSU Agend backend repository for managing backend services and APIs. Managed by Terraform."
+    visibility  = "public"
+    topics      = ["msu", "backend", "CSharp", "web"]
+    auto_init   = true
+
+    team_access = {
+      "web-team"    = "maintain"
+      "devops-team" = "admin"
+    }
+
+    required_approving_review_count = 1
   }
 }
