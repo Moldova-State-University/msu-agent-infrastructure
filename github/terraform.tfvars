@@ -240,7 +240,7 @@ repositories = {
     name        = "msu-agent-backend"
     description = "MSU Agend backend repository for managing backend services and APIs. Managed by Terraform."
     visibility  = "public"
-    topics      = ["msu", "backend", "CSharp", "web"]
+    topics      = ["msu", "backend", "csharp", "web"]
     auto_init   = true
 
     team_access = {
