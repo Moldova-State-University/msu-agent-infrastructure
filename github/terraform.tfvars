@@ -15,7 +15,10 @@ users = {
   },
   "TrEtLiz" = {
     org_role = "admin"
-  }
+  },
+  "AntonC9018" = {
+    org_role = "admin"
+  },
 
   # Members
   "JUnknowL" = {
@@ -54,7 +57,7 @@ users = {
 sub_team = {
   "ai-team" = {
     description = "AI Team with access to AI-related repositories"
-    members     = ["mcroitor", "devrdn", "AndreiKlinchev", "statova-nadejda", "sharishi", "danutasemeniuc"]
+    members     = ["mcroitor", "devrdn", "AndreiKlinchev", "statova-nadejda", "sharishi", "danutasemeniuc", "AntonC9018"]
   },
   "ar-team" = {
     description = "AR Team with access to AR-related repositories"

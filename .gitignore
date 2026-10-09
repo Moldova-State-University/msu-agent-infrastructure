@@ -28,3 +28,5 @@ terraform.rc
 
 # Exclude specific .tfvars file that is needed for ci/cd pipeline
 !github/terraform.tfvars
+
+.DS_Store
